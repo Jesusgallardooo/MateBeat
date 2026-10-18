@@ -20,6 +20,10 @@ y al poder compartir tus gustos e intereses con gente a la que realmente le inte
 * El deseo de descubrir nueva música.
 * Conocer gente con los mismos gustos (o no) que puedan nutrirte musicalmente.
 
+### 1.3. Restricciones ambientales
+La app debe responder a un contexto de uso en la calle, gimnasio o cocina (como se refleja en Alejandro Ballesteros), requiriendo un diseño mobile-first intuitivo con botones 
+amplios accesible con una sola mano y bajo consumo de datos móviles.
+
 ---
 
 ## 2. Estudio de Aplicaciones Referentes
@@ -84,6 +88,10 @@ y al poder compartir tus gustos e intereses con gente a la que realmente le inte
   3. Seleccionar canción ──> ¿Qué quieres hacer?
      * Guardarla en una playlist ──> ¿Quieres volver al menú? (Sí ──> Menú / No ──> Canción)
      * Escucharla ──> ¿Quieres añadirla a una playlist? (Sí ──> Guardarla en una playlist / No ──> ¿Quieres volver al menú? (Sí ──> Menú / No ──> Canción )
+
+### 5.3. Descartes y motivos
+Se ha decidido dejar fuera el reconocimiento de canciones con Shazam porque sería complicado de implementar y consumiría demasiado tiempo para un MVP de solo 20 horas. También se descarta el desarrollo del diario musical.
+También se descarta crear un sistema avanzado de foros e hilos para centrarnos en probar las funciones principales de la aplicación: descubrir música, escuchar canciones y llevar un diario musical.
 
 ---
 
