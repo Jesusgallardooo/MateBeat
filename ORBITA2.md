@@ -15,9 +15,9 @@
 | Inventario de decisiones | Página: Tokens de diseño (incompleto / en proceso de unificación) |
 | Wireframes rediseñados con sus notas | Página: Wireframes base (sin rediseño formal anotado) |
 | Componentes | Pendiente de estructurar en biblioteca |
-| Mockups del happy path | Página: Escritorio (Menú principal, Perfil, Ayuda) y Móvil |
-| Pantalla principal en el segundo ancho | Página: Móvil (Mockup adaptado a smartphone) |
-| Pantallas en modo oscuro | Aplicado en todos los Mockups principales (`indigo/900`) |
+| Mockups del happy path | Pendiente |
+| Pantalla principal en el segundo ancho | Página: Móvil (Mockup adaptado a móvil) |
+| Pantallas en modo oscuro | Aplicado en todos los Mockups principales |
 | Guía de estilo | En proceso (definidos los tokens de variables) |
 
 ## Lista de comprobación de Figma
@@ -46,14 +46,14 @@ Por falta de tiempo no he podido realizar un rediseño completo ni formalizado d
 Utilizo una tipografía sans-serif moderna, de trazo limpio y directo. Se han empleado pesos **Bold (Negrita)** para jerarquizar los títulos principales (`¡Hola, [Usuario]!`, títulos de secciones y encabezados de tarjetas) y pesos **Regular / Medium** para los textos secundarios, placeholders de búsqueda y menús. Esta elección busca que los usuarios jóvenes de MateBeat puedan escanear rápidamente la pantalla sin fatiga visual.
 
 ### Espaciado y retícula
-* **Base de la escala:** Basada en una escala de **8 píxeles** (con pasos de `8px`, `16px`, `24px`, `32px` y `40px`) para mantener la coherencia espacial en paddings y márgenes.
-* **Retícula:** Para la versión de escritorio, el layout principal se organiza en 2 columnas principales fijando un **Sidebar lateral** y un área de contenido derecha flexible (`Fill container`). Los elementos internos usan Auto Layout con espaciados definidos.
+* **Base de la escala:** Basada en una escala de **4/8 píxeles** (con pasos de `2px`,`4px`,`8px`, `16px`, `24px`, `32px`, `48px` y `64px`) para mantener la coherencia espacial en paddings y márgenes.
+* **Retícula:** Para la versión de escritorio, el layout principal se organiza en 2 columnas principales fijando un **Sidebar lateral** y un área de contenido derecha flexible (`rellenar contenedor`). Los elementos internos usan Auto Layout con espaciados definidos.
 
 ### Componentes
 * **Estado actual:** Debido al ajuste de tiempos, las pantallas se han maquetado utilizando estructuras de Auto Layout y marcos reutilizables directamente sobre los mockups. La creación de una biblioteca centralizada de componentes con sus variantes de estado (hover, pressed...) queda como tarea pendiente para completar el sistema visual.
 
 ### Responsive y modo oscuro
-* **Responsive (Segundo ancho):** Al trasladar la pantalla principal al tamaño móvil, tuve que reorganizar la disposición horizontal del escritorio en un flujo único vertical (`↓`). Los bloques como la cabecera y el grid de accesos rápidos pasan a apilarse de uno en uno para adaptarse al ancho estrecho de la pantalla del teléfono. El responsive está planteado e intentado, aunque por tiempo aún tiene detalles por pulir para que sea 100% fluido.
+* **Responsive (Segundo ancho):** Al trasladar la pantalla principal al tamaño móvil, tuve que reorganizar la disposición horizontal del escritorio en un flujo único vertical. Los bloques como la cabecera y el grid de accesos rápidos pasan a apilarse de uno en uno para adaptarse al ancho estrecho de la pantalla del teléfono. El responsive está planteado e intentado, aunque por tiempo aún tiene detalles por pulir para que sea 100% fluido.
 * **Modo oscuro:** Al aplicar las variables de modo oscuro, tuve que ajustar el tono de los bordes finos (`purple/300`) y las tarjetas internas (`indigo/900`) para asegurarme de que el contraste fuera el adecuado y ninguna caja se disolviera contra el fondo azul/violeta principal (`#18192A`).
 
 ## Uso de IA
@@ -63,7 +63,7 @@ Durante el trabajo en la Órbita 2 he utilizado la IA como una herramienta de so
 1. **Inspiración con Stitch:** Utilicé Stitch en una actividad de clase donde me generó una interfaz muy pulida y profesional. Me sirvió de inspiración para coger ideas visuales y de distribución, aunque no copié el diseño tal cual en mi mockup.
 2. **Creación de tokens de diseño:** Al no dominar Figma del todo, me apoyé en la IA para estructurar y plasmar mis ideas de tokens. Una vez creadas las variables, usé la propia IA de Figma para generar un resumen claro de los tokens creados.
 3. **Psicología del color:** Consulté a Gemini para fundamentar con un argumento sólido la elección de la paleta de colores (`purple`, `indigo`, `pink`) según la personalidad de la app.
-4. **Asistencia con Auto Layout:** Resolví dudas puntuales con Gemini cuando me quedaba atascado ajustando jerarquías de contenedores, alturas y comportamientos (`Fill container` / `Hug contents`) en el mockup de escritorio.
+4. **Asistencia con Auto Layout:** Resolví dudas puntuales con Gemini cuando me quedaba atascado ajustando jerarquías de contenedores, alturas y comportamientos (`rellenar contenedor` / `ajustar contenido`) en el mockup de escritorio.
 5. **MockUp para móvil:** Por falta de tiempo y para no entregar esa parte en blanco, utilicé la IA de Figma para generar una propuesta inicial del mockup móvil a partir de mi wireframe y del diseño de escritorio. La idea es tomarla como base e inspiración para rediseñarla a mano más adelante.
 6. **Refinamiento del logo:** Utilicé Stitch y Gemini para terminar de aterrizar y pulir el logo de MateBeat hasta conseguir la idea exacta que tenía en mente.
 7. **Maquetación del documento:** Me ayudó a estructurar y maquetar este documento `ORBITA2.md` en formato Markdown de forma limpia y rápida.
@@ -73,6 +73,6 @@ Durante el trabajo en la Órbita 2 he utilizado la IA como una herramienta de so
 Por motivos personales de fuerza mayor y por ende, falta de tiempo en estas semanas, no he podido dejar el proyecto al 100% como me habría gustado. En concreto, ha quedado pendiente:
 
 * **Componentes y variantes de estado:** No he tenido tiempo de convertir los elementos (botones, inputs, tarjetas) en componentes oficiales de Figma con sus variantes de estado interactivo.
-* **Prototipado interactivo:** La navegación en prototipo entre las distintas pantallas (Menú, Perfil, Ayuda) no está conectada con spagetti/links por falta de tiempo.
+* **Prototipado interactivo:** La navegación en prototipo entre las distintas pantallas (Menú, Perfil, Ayuda) no está conectada por falta de tiempo.
 * **Rediseño anotado de wireframes e inventario de decisiones:** Falta unificar en un único archivo formal la guía de estilo final con los mockups y los wireframes anotados.
 * **Ajuste fino del responsive móvil:** El mockup de móvil se ha dejado planteado mediante ayuda de IA como base de partida, pero requiere volver a diseñarlo a mano para que encaje perfectamente con la estructura del escritorio y con la idea que tengo en mente.
