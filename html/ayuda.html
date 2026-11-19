@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="color-scheme" content="light dark">
+    <title>Ayuda · MateBeat</title>
+    <meta name="description" content="Consulta las dudas y los problemas con MateBeat">
+    <link rel="stylesheet" href="../css/main.css">
+</head>
+<body>
+    
+    <header>
+
+        <a href="menuPrincipal.html">
+            <img src="../assets/" alt="MateBeat, Música y amigos" width="160" height="160">
+        </a>
+
+        <nav aria-label="navegación principal">
+            <ul>
+                <li><a href="menuPrincipal.html">Inicio</a></li>
+                <li><a href="actividad.html">Actividad</a></li>
+                <li><a href="perfil.html">Perfil</a></li>
+                <li><a href="ayuda.html" aria-label="pagina-actual">Ayuda</a></li>
+            </ul>
+        </nav>
+
+    </header>
+
+    <main>
+        <h1>Centro de ayuda y contacto</h1>
+
+        <form action="#" method="get">
+            <label for="buscador-ayuda"></label>
+            <input type="search" id="buscador-ayuda" placeholder="¿Qué duda tienes sobre nosotros?">
+        </form>
+
+        <div>
+            <section aria-labelledby="titulo-preguntas-frecuentes">
+                <h2 id="titulo-preguntas-frecuentes"></h2>
+
+                <ul>
+                    <li>
+                        <details>
+                            <summary>¿Qué es MateBeat?</summary>
+                            <p>MateBeat es una plataforma social para descubrir música, compartir playlists y conectar con amigos según tus gustos musicales.</p>                        </details>
+                    </li>
+                    <li>
+                        <details>
+                            <summary>¿Cómo funcionan las recomendaciones y el feed principal?</summary>
+                            <p>El feed muestra canciones, álbumes y actividad reciente basada en tus escuchas semanales y en las interacciones de las personas a las que sigues.</p>
+                        </details>
+                    </li>
+                    <li>
+                        <details>
+                            <summary>¿Qué hago si una canción o un artista no aparece en la app?</summary>
+                            <p>Puedes enviarnos el nombre del artista o tema a través del formulario de contacto de esta misma página para que nuestro equipo lo revise.</p>
+                        </details>
+                    </li>
+                </ul>
+
+            </section>
+
+            <section aria-labelledby="titulo-contacto">
+                <h2 id="titulo-contacto">Formulario de contacto</h2>
+
+                <form action="#" method="post">
+
+                    <label for="contacto-asunto">Asunto:</label>
+                    <textarea name="asunto" id="contacto-asunto" placeholder="Escribe aquí tu asunto" required></textarea>
+
+                    <label for="contacto-mensaje">Mensaje</label>
+                    <textarea name="mensaje" id="contacto-mensaje" placeholder="Escribe aquí tu mensaje" required></textarea>
+
+                    <button type="submit">Enviar mensaje</button>
+                </form>
+            </section>
+        </div>
+
+    </main>
+
+</body>
+</html>
