@@ -21,6 +21,9 @@
                 <li><a href="menuPrincipal.html">Inicio</a></li>
                 <li><a href="perfil.html">Perfil</a></li>
                 <li><a href="ayuda.html" aria-label="pagina-actual">Ayuda</a></li>
+                <li><a href="usuarios.html">Usuarios</a></li>
+                <li><a href="usuarios.html">Mensajes</a></li>
+
             </ul>
         </nav>
 
@@ -63,20 +66,49 @@
             <section aria-labelledby="titulo-contacto">
                 <h2 id="titulo-contacto">Formulario de contacto</h2>
 
-                <form action="#" method="post">
+                <form id="form-contacto" action="ayuda.html" method="get" novalidate>
 
-                    <label for="contacto-asunto">Asunto:</label>
-                    <textarea name="asunto" id="contacto-asunto" placeholder="Escribe aquí tu asunto" required></textarea>
+                    <label for="contacto-nombre">Nombre</label>
+                    <input type="text" name="nombre" id="contacto-nombre" placeholder="Pacopepe" autocomplete="name">
+                    <span id="error-contacto-nombre"></span>
+
+                    <label for="contacto-email">Correo electrónico</label>
+                    <input type="email" name="email" id="contacto-email" placeholder="tucorreo@gmail.com" autocomplete="email">
+                    <span id="error-contacto-email"></span>
+
+                    <label for="contacto-telefono">Teléfono (opcional)</label>
+                    <input type="tel" name="telefono" id="contacto-telefono" placeholder="ej: 676 676 676" autocomplete="tel">
+                    <span id="error-contacto-telefono"></span>
+
+                    <label for="contacto-llamar">
+                        <input type="checkbox" name="llamar" id="contacto-llamar">
+                        Prefiero que me llaméis
+                    </label>
+
+                    <label for="contacto-motivo">Motivo</label>
+                    <select name="motivo" id="contacto-motivo">
+                        <option value="">Selecciona un motivo</option>
+                        <option value="cancion-faltante">Proponer canción o artista</option>
+                        <option value="incidencia-playlist">Incidencia con una playlist</option>
+                        <option value="problema-cuenta">Problema con mi cuenta</option>
+                        <option value="sugerencia">Sugerencia para MateBeat</option>
+                    </select>
+                    <span id="error-contacto-motivo"></span>
 
                     <label for="contacto-mensaje">Mensaje</label>
-                    <textarea name="mensaje" id="contacto-mensaje" placeholder="Escribe aquí tu mensaje" required></textarea>
+                    <textarea name="mensaje" id="contacto-mensaje" placeholder="Escribe aquí tu mensaje" maxlength="300"></textarea>
+                    <small id="contador-mensaje">0 / 300</small>
+                    <span id="error-contacto-mensaje"></span>
 
                     <button type="submit">Enviar mensaje</button>
                 </form>
+
+                <p><a href="mensajes.html">Ver mensajes enviados</a></p>
             </section>
         </div>
 
     </main>
 
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>

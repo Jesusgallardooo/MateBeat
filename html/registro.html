@@ -17,12 +17,32 @@
             <h1>Crear cuenta</h1>
             <p>Únete a MateBeat para compartir tu música</p>
 
-            <form action="menuPrincipal.html" method="get">
-                <label for="registro-usuario">Email/usuario</label>
-                <input type="text" name="usuario" id="registro-usuario" placeholder="tucorreo@gmail.com" autocomplete="username">
+            <form action="menuPrincipal.html" method="get" novalidate>
+                <label for="registro-usuario">Nombre de usuario</label>
+                <input type="text" name="usuario" id="registro-usuario" placeholder="pacopepe" autocomplete="username">
+                <span id="error-usuario"></span>
+
+                <label for="registro-email">Correo electrónico</label>
+                <input type="email" name="email" id="registro-email" placeholder="tucorreo@gmail.com" autocomplete="email@mismo.com">
+                <span id="error-email"></span>
 
                 <label for="registro-password">Contraseña</label>
-                <input type="text" name="password" id="registro-password" placeholder="••••••••••" autocomplete="new-password">
+                <input type="password" name="password" id="registro-password" placeholder="••••••••••" autocomplete="new-password">
+                <span id="error-password"></span>
+
+                <label for="registro-repetir-password">Repetir contraseña</label>
+                <input type="password" name="repetirPassword" id="registro-repetir-password" placeholder="••••••••••" autocomplete="new-password">
+                <span id="error-repetir-password"></span>
+
+                <label for="registro-fecha">Fecha de nacimiento</label>
+                <input type="date" name="fechaNacimiento" id="registro-fecha">
+                <span id="error-fecha"></span>
+
+                <label for="registro-condiciones">
+                    <input type="checkbox" name="condiciones" id="registro-condiciones">
+                    Acepto las condiciones de uso
+                </label>
+                <span id="error-condiciones"></span>
             
                 <button type="submit">¡Vamos!</button>
             </form>
@@ -32,5 +52,7 @@
         </section>
 
     </main>
+
+    <script type="module" src="../js/main.js"></script>
 </body>
 </html>
