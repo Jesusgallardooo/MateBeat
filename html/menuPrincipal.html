@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark">
     <title>Menu principal · MateBeat</title>
     <meta name="description" content="Explora música, descubre recomendaciones y accede rápido a tu actividad en MateBeat.">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     
@@ -39,6 +39,7 @@
         <div>
             <section aria-label="Musica e interacciones">
                 <p>Música e interacciones que podrían interesarte</p>
+                <div id="listado-musica" class="lista-recomendaciones"></div>
             </section>
 
             <section aria-labelledby="titulo-acceso-rapido">
@@ -71,6 +72,12 @@
         </div>
 
     </main>
+
+    <dialog id="modal-detalle" class="modal-detalle">
+        <div id="contenido-detalle"></div>
+    </dialog>
+
+    <script type="module" src="../js/main.js"></script>
 
 </body>
 </html>

@@ -1,3 +1,340 @@
-/*
-archivo css
-*/
+/* =========================================
+1. TOKENS DE DISEÑO (Paleta Figma MateBeat)
+   ========================================= */
+:root {
+  --bg-principal: #23273d;
+  --bg-tarjeta: #3a324b;
+  --bg-panel: #3d2147;
+  --bg-sidebar: #1c2033;
+  --color-primario: #9b3588;
+  --color-primario-hover: #b3429e;
+  --borde-suave: #564a6d;
+  --texto-principal: #ffffff;
+  --texto-secundario: #c4bed1;
+  --radio-tarjeta: 16px;
+  --radio-pildora: 999px;
+}
+
+/* =========================================
+2. RESET Y ESTILOS BASE
+   ========================================= */
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  background-color: var(--bg-principal);
+  color: var(--texto-principal);
+  min-height: 100vh;
+}
+
+/* =========================================
+3. LAYOUT PRINCIPAL (Sidebar + Dashboard)
+   ========================================= */
+body:has(> header) {
+  display: grid;
+  grid-template-columns: 240px 1fr;
+  height: 100vh;
+  overflow: hidden;
+}
+
+body > header {
+  background-color: var(--bg-sidebar);
+  padding: 2rem 1.25rem;
+  display: flex;
+  flex-direction: column;
+  border-right: 1px solid rgba(255, 255, 255, 0.08);
+  height: 100vh;
+}
+
+body > header > a {
+  display: block;
+  text-align: center;
+  margin-bottom: 2.25rem;
+}
+
+body > header > a img {
+  width: 120px;
+  height: auto;
+  margin: 0 auto;
+}
+
+body > header nav ul {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+body > header nav a {
+  display: block;
+  padding: 0.7rem 1.1rem;
+  border-radius: var(--radio-pildora);
+  color: var(--texto-principal);
+  text-decoration: none;
+  font-weight: 600;
+  font-size: 0.95rem;
+  transition: background-color 0.2s ease;
+}
+
+body > header nav a:hover {
+  background-color: rgba(155, 53, 136, 0.25);
+}
+
+body > header nav a[aria-current="page"],
+body > header nav a[aria-label="pagina-actual"] {
+  background-color: var(--color-primario);
+}
+
+/* =========================================
+4. CONTENIDO DERECHO Y BUSCADOR
+   ========================================= */
+body > main {
+  padding: 1.5rem 2.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 1.25rem;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+body > main > h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  text-align: center;
+}
+
+body > main > form {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  background-color: rgba(28, 32, 51, 0.45);
+  border: 1px solid var(--borde-suave);
+  border-radius: 10px;
+  padding: 0.65rem 1rem;
+}
+
+body > main > form:focus-within {
+  border-color: var(--color-primario-hover);
+}
+
+body > main > form input[type="search"] {
+  width: 100%;
+  background: transparent;
+  border: none;
+  color: var(--texto-principal);
+  font-family: inherit;
+  font-size: 0.95rem;
+  outline: none;
+}
+
+body > main > form input[type="search"]::placeholder {
+  color: var(--texto-secundario);
+}
+
+/* =========================================
+5. GRID CENTRAL (Feed + Acceso Rápido)
+   ========================================= */
+body > main > div {
+  display: grid;
+  grid-template-columns: 1.15fr 1fr;
+  gap: 1.5rem;
+  align-items: stretch;
+  flex: 1;
+  min-height: 0;
+}
+
+/* Panel izquierdo (Feed dinámico) */
+body > main > div > section:first-child {
+  background-color: var(--bg-panel);
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-tarjeta);
+  padding: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-height: 0;
+}
+
+body > main > div > section:first-child > p {
+  font-size: 1.05rem;
+  color: var(--texto-secundario);
+  text-align: center;
+}
+
+.lista-recomendaciones {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+  flex: 1;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+  scrollbar-width: thin;
+  scrollbar-color: #9b308e transparent;
+}
+
+/* Tarjetas generadas por JS */
+.tarjeta-playlist {
+  background-color: rgba(28, 32, 51, 0.75);
+  border: 1px solid var(--borde-suave);
+  border-radius: 12px;
+  padding: 0.9rem 1rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 1rem;
+  cursor: pointer;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+
+.tarjeta-playlist:hover {
+  transform: translateY(-2px);
+  border-color: var(--color-primario-hover);
+}
+
+.tarjeta-playlist h3 {
+  font-size: 1rem;
+  margin-bottom: 0.2rem;
+}
+
+.tarjeta-playlist p {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+}
+
+.badge-genero {
+  background-color: var(--color-primario);
+  color: var(--texto-principal);
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.3rem 0.75rem;
+  border-radius: var(--radio-pildora);
+  white-space: nowrap;
+}
+
+/* Panel derecho (Acceso rápido 2x2) */
+body > main > div > section:last-child {
+  display: flex;
+  flex-direction: column;
+  gap: 0.85rem;
+  min-height: 0;
+}
+
+body > main > div > section:last-child > h2 {
+  font-size: 1.35rem;
+  font-weight: 700;
+}
+
+body > main > div > section:last-child > ul {
+  list-style: none;
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.1rem;
+  flex: 1;
+}
+
+body > main > div > section:last-child > ul > li {
+  display: flex;
+}
+
+body > main > div > section:last-child article {
+  width: 100%;
+  background-color: var(--bg-panel);
+  border: 1px solid var(--borde-suave);
+  border-radius: var(--radio-tarjeta);
+  padding: 1.2rem;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 0.85rem;
+}
+
+body > main > div > section:last-child article h3 {
+  font-size: 1.05rem;
+  text-align: center;
+}
+
+body > main > div > section:last-child article p {
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+  text-align: center;
+}
+
+/* =========================================
+6. MODAL DE DETALLE (<dialog>)
+   ========================================= */
+.modal-detalle {
+  margin: auto;
+  background-color: var(--bg-tarjeta);
+  color: var(--texto-principal);
+  border: 1px solid var(--color-primario-hover);
+  border-radius: var(--radio-tarjeta);
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+  box-shadow: 0 20px 45px rgba(0, 0, 0, 0.6);
+}
+
+.modal-detalle::backdrop {
+  background: rgba(15, 17, 29, 0.75);
+  backdrop-filter: blur(3px);
+}
+
+.detalle-cabecera {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.btn-cerrar-modal {
+  background: transparent;
+  border: 1px solid var(--borde-suave);
+  color: var(--texto-principal);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  cursor: pointer;
+  font-weight: 700;
+  flex-shrink: 0;
+  transition: border-color 0.2s ease, background-color 0.2s ease;
+}
+
+.btn-cerrar-modal:hover {
+  border-color: var(--color-primario-hover);
+  background-color: rgba(155, 53, 136, 0.25);
+}
+
+.detalle-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 0.75rem;
+  margin: 0.85rem 0;
+  font-size: 0.85rem;
+  color: var(--texto-secundario);
+}
+
+.detalle-resena {
+  background-color: var(--bg-principal);
+  padding: 1rem 1.25rem;
+  border-radius: 10px;
+  line-height: 1.5;
+  font-size: 0.92rem;
+  margin-top: 0.75rem;
+}
+
+.detalle-resena ul {
+  margin-top: 0.75rem;
+  padding-left: 1.25rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.35rem;
+  color: var(--texto-secundario);
+}
