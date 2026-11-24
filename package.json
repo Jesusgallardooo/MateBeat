@@ -1,0 +1,14 @@
+{
+    "name": "matebeat-dwec",
+    "version": "1.0.0",
+    "description": "Aplicación web social de música MateBeat - Proyecto SPA en JS",
+    "type": "module",
+    "scripts": {
+        "lint": "eslint js/"
+    },
+    "devDependencies": {
+    "@eslint/js": "^9.39.4",
+    "eslint": "^9.39.4",
+    "globals": "^16.0.0"
+    }
+}

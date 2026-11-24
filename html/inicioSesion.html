@@ -6,7 +6,7 @@
     <meta name="color-scheme" content="light dark">
     <title>Inicio de sesión · MateBeat</title>
     <meta name="description" content="Inicia sesión en MateBeat.">
-    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/styles.css">
 </head>
 <body>
     <main>
@@ -14,15 +14,15 @@
         <section>
 
             <img src="../assets/logo_m8beat.png" alt="MateBeat, Música y amigos" width="200" height="200">
-            <h1>Crear cuenta</h1>
+            <h1>Inicia sesión</h1>
             <p>¡Disfruta la música como nunca antes!</p>
 
-            <form action="#" method="post">
+            <form action="menuPrincipal.html" method="get">
                 <label for="login-usuario">Email/usuario</label>
-                <input type="text" name="usuario" id="login-usuario" placeholder="tucorreo@gmail.com" autocomplete="username" required>
+                <input type="text" name="usuario" id="login-usuario" placeholder="tucorreo@gmail.com" autocomplete="username">
 
                 <label for="registro-password">Contraseña</label>
-                <input type="text" name="password" id="login-password" placeholder="••••••••••" autocomplete="current-password" required>
+                <input type="text" name="password" id="login-password" placeholder="••••••••••" autocomplete="current-password">
             
                 <button type="submit">¡Vamos!</button>
             </form>
