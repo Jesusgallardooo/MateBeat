@@ -1,8 +1,10 @@
 // archivo validaciones
 
 // Regexs 
-
 const REGEX_EMAIL = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+const REGEX_TELEFONO = /^[6789]\d{2}[\s-]?\d{3}[\s-]?\d{3}$/;
+
+// Validaciones registro
 
 // Comprueba que el usuario no esté en blanco y cumpla con el numero de caracteres requerido
 export function validarUsuario(valor, min, max){
@@ -121,6 +123,90 @@ export function validarCampoRegistro(input, passwordOriginal, editando) {
 
     if (input.id === "registro-condiciones") {
         return validarCondiciones(input.checked);
+    }
+
+    return null;
+}
+
+// Validaciones formulario de contacto
+
+// Comprueba que el nombre no esté vacío y cumpla cpm el numero de caracteres requerido
+export function validarNombreContacto(valor, min, max){
+    const texto = valor.trim();
+
+    if (texto === "") {
+        return "El nombre es obligatorio.";
+    }
+    if (min > 0 && texto.length < min) {
+        return "El nombre debe tener al menos " + min + " caracteres.";
+    }
+    if (max > 0 && texto.length > max) {
+        return "El nombre no puede superar los " + max + " caracteres.";
+    }
+    return null;
+}
+
+// Si marca que prefiere llamada pasa a ser obligatorio
+export function validarTelefono(valor, quiereLlamada){
+    const texto = valor.trim();
+
+    if (texto === "") {
+        if (quiereLlamada) {
+            return "El teléfono es obligatorio si marcas que prefieres que te llamemos.";
+        }
+        return null;
+    }
+
+    if (!REGEX_TELEFONO.test(texto)) {
+        return "Introduce un teléfono válido de 9 dígitos (ej: 676 676 676).";
+    }
+    return null;
+}
+
+// Comprueba que se haya seleccionado una opción del select
+export function validarMotivo(valor){
+    if (valor === "") {
+        return "Debes seleccionar un motivo.";
+    }
+    return null;
+}
+
+// Comprueba que el mensaje cumpla una longitud admitida
+export function validarMensaje(valor, min, max){
+    const texto = valor.trim();
+
+    if (texto === "") {
+        return "El mensaje es obligatorio.";
+    }
+    if (min > 0 && texto.length < min) {
+        return "El mensaje debe tener al menos " + min + " caracteres.";
+    }
+    if (max > 0 && texto.length > max) {
+        return "El mensaje no puede superar los " + max + " caracteres.";
+    }
+    return null;
+}
+
+// Valida cada campo concreto del formulario de contacto
+export function validarCampoContacto(campo, quiereLlamada){
+    if (campo.id === "contacto-nombre") {
+        return validarNombreContacto(campo.value, campo.minLength, campo.maxLength);
+    }
+
+    if (campo.id === "contacto-email") {
+        return validarCorreo(campo.value);
+    }
+
+    if (campo.id === "contacto-telefono") {
+        return validarTelefono(campo.value, quiereLlamada);
+    }
+
+    if (campo.id === "contacto-motivo") {
+        return validarMotivo(campo.value);
+    }
+
+    if (campo.id === "contacto-mensaje") {
+        return validarMensaje(campo.value, campo.minLength, campo.maxLength);
     }
 
     return null;

@@ -1150,3 +1150,8 @@ body:has(> header) > main > section[aria-labelledby="titulo-mensajes"] > a:hover
 #lista-usuarios li div button {
     flex: 1;
 }
+
+#lista-mensajes li p {
+    overflow-wrap: break-word;
+    word-break: break-word;
+}

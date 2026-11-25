@@ -1,7 +1,14 @@
 import { generosMusicales, playlists } from './datos.js';
-import { pintarListaPlaylists,mostrarDetallesPlaylist,mostrarError,rellenarFormularioEditar,pintarUsuarios} from './ui.js';
+import { pintarListaPlaylists,
+    mostrarDetallesPlaylist,
+    mostrarError,
+    rellenarFormularioEditar,
+    pintarUsuarios,
+    pintarMensajes,
+    actualizarContadorCaracteres
+} from './ui.js';
 import { obtenerTodos, obtenerPorId, crear, actualizar, borrar } from "./almacen.js";
-import { validarCampoRegistro } from "./validacion.js";
+import { validarCampoRegistro, validarCampoContacto } from "./validacion.js";
 
 
 // Hito 1
@@ -39,7 +46,7 @@ if (formularioRegistro) {
     ];
 
     // Campos que hemos cambiado / intentado cambiar
-    const camposModificados = {};
+    const camposModificadosReg = {};
 
     // Compruebo si la url tiene alguna id asignada, si sí editamos un usuario ya existente y si no lo creamso
     const parametros = new URLSearchParams(window.location.search);
@@ -60,13 +67,13 @@ if (formularioRegistro) {
     // valido cada campo al salir de dicho campo 
     for (const campo of campos) {
         campo.addEventListener("blur", function () {
-            camposModificados[campo.id] = true;
+            camposModificadosReg[campo.id] = true;
             const error = validarCampoRegistro(campo, inputPassword.value, editando);
             mostrarError(campo, error);
         });
 
         campo.addEventListener("input", function () {
-            if (camposModificados[campo.id]) {
+            if (camposModificadosReg[campo.id]) {
                 const error = validarCampoRegistro(campo, inputPassword.value, editando);
                 mostrarError(campo, error);
             }
@@ -81,7 +88,7 @@ if (formularioRegistro) {
 
         // campo a campo
         for (const campo of campos) {
-            camposModificados[campo.id] = true;
+            camposModificadosReg[campo.id] = true;
             const error = validarCampoRegistro(campo, inputPassword.value, editando);
             mostrarError(campo, error);
 
@@ -141,6 +148,122 @@ if (listaUsuarios) {
             if (seguro) {
                 borrar("usuarios", id);
                 pintarUsuarios(listaUsuarios, obtenerTodos("usuarios"));
+            }
+        }
+    });
+}
+
+//  Formulario contacto
+
+const formularioContacto = document.getElementById(`form-contacto`);
+
+if (formularioContacto){
+    const inputNombre = document.getElementById("contacto-nombre");
+    const inputEmail = document.getElementById("contacto-email");
+    const inputTelefono = document.getElementById("contacto-telefono");
+    const llamarOno = document.getElementById("contacto-llamar");
+    const selectMotivo = document.getElementById("contacto-motivo");
+    const textareaMensaje = document.getElementById("contacto-mensaje");
+    const contadorMensaje = document.getElementById("contador-mensaje");
+
+    const campos = [
+        inputNombre,
+        inputEmail,
+        inputTelefono,
+        selectMotivo,
+        textareaMensaje
+    ];
+
+    const camposModificadosCont = {};
+
+    // Iniciamos el contador en 0 / 300 y lo actualizamos al escribir
+    actualizarContadorCaracteres(textareaMensaje, contadorMensaje);
+    textareaMensaje.addEventListener("input", function () {
+        actualizarContadorCaracteres(textareaMensaje, contadorMensaje);
+    });
+
+    // Valida el contenido del telefono en funcion se maruqe el checkbox
+    llamarOno.addEventListener("change", function () {
+        camposModificadosCont[inputTelefono.id] = true;
+        const errorTel = validarCampoContacto(inputTelefono, llamarOno.checked);
+        mostrarError(inputTelefono, errorTel);
+    });
+
+    for (const campo of campos) {
+        campo.addEventListener("blur", function () {
+            camposModificadosCont[campo.id] = true;
+            const error = validarCampoContacto(campo, llamarOno.checked);
+            mostrarError(campo, error);
+        });
+
+        campo.addEventListener("input", function () {
+            if (camposModificadosCont[campo.id]) {
+                const error = validarCampoContacto(campo, llamarOno.checked);
+                mostrarError(campo, error);
+            }
+        });
+    }
+
+    formularioContacto.addEventListener("submit", function (evento) {
+        evento.preventDefault();
+
+        let primerError = null;
+
+        for (const campo of campos) {
+            camposModificadosCont[campo.id] = true;
+            const error = validarCampoContacto(campo, llamarOno.checked);
+            mostrarError(campo, error);
+
+            if (error !== null && primerError === null) {
+                primerError = campo;
+            }
+        }
+
+        if (primerError !== null) {
+            primerError.focus();
+            return;
+        }
+
+        const datosMensaje = {
+            nombre: inputNombre.value.trim(),
+            email: inputEmail.value.trim(),
+            telefono: inputTelefono.value.trim(),
+            prefiereLlamada: Boolean(llamarOno.checked),
+            motivo: selectMotivo.value,
+            motivoTexto: selectMotivo.options[selectMotivo.selectedIndex].textContent,
+            mensaje: textareaMensaje.value.trim(),
+            fecha: new Date().toLocaleDateString("es-ES")
+        };
+
+        crear("mensajes", datosMensaje);
+
+        formularioContacto.reset();
+        window.location.href = "mensajes.html";
+    });
+}
+
+
+// Vista de los mensajes enviados 
+const listaMensajes = document.getElementById("lista-mensajes");
+
+if (listaMensajes) {
+    pintarMensajes(listaMensajes, obtenerTodos("mensajes"));
+
+    listaMensajes.addEventListener("click", function (evento) {
+        const elemento = evento.target;
+
+        if (elemento.tagName !== "BUTTON") {
+            return;
+        }
+
+        const accion = elemento.getAttribute("data-accion");
+        const id = elemento.getAttribute("data-id");
+
+        if (accion === "borrar") {
+            const seguro = confirm("¿Seguro que quieres borrar este mensaje?");
+            if (seguro) {
+                borrar("mensajes", id);
+                pintarMensajes(listaMensajes, obtenerTodos("mensajes"));
             }
         }
     });

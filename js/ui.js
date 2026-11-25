@@ -125,6 +125,9 @@ export function mostrarDetallesPlaylist(modal, contenedor, playlist, generos) {
     modal.showModal();
 }
 
+
+// Formulario de registro 
+
 // Muestra cada error correspondiente
 export function mostrarError(input, mensaje) {
         const idSpan = input.getAttribute("aria-describedby");
@@ -184,14 +187,14 @@ export function pintarUsuarios(listaUsuarios, usuarios) {
         const btnEditar = document.createElement("button");
         btnEditar.type = "button";
         btnEditar.textContent = "Editar";
-        btnEditar.setAttribute("data-accion", "editar");
-        btnEditar.setAttribute("data-id", usuario.id);
+        btnEditar.dataset.accion = "editar";
+        btnEditar.dataset.id = usuario.id;
 
         const btnBorrar = document.createElement("button");
         btnBorrar.type = "button";
         btnBorrar.textContent = "Borrar";
-        btnBorrar.setAttribute("data-accion", "borrar");
-        btnBorrar.setAttribute("data-id", usuario.id);
+        btnBorrar.dataset.accion = "borrar";
+        btnBorrar.dataset.id = usuario.id;
 
         cajaBotones.appendChild(btnEditar);
         cajaBotones.appendChild(btnBorrar);
@@ -201,5 +204,75 @@ export function pintarUsuarios(listaUsuarios, usuarios) {
         li.appendChild(fecha);
         li.appendChild(cajaBotones);
         listaUsuarios.appendChild(li);
+    }
+}
+
+// Contacto y mensajes
+
+// Actualiza el contador de caracteres " 0/300" 
+export function actualizarContadorCaracteres(textarea, elementoContador) {
+    const actual = textarea.value.length;
+    const maximo = textarea.maxLength;
+    elementoContador.textContent = actual + " / " + maximo;
+}
+
+// Pinta los mensajes enviados
+export function pintarMensajes(listaMensajes, mensajes) {
+    if (!listaMensajes) {
+        return;
+    }
+
+    limpiar(listaMensajes);
+
+    if (mensajes.length === 0) {
+        const liVacio = document.createElement("li");
+        liVacio.textContent = "No has enviado ningún mensaje todavía.";
+        listaMensajes.appendChild(liVacio);
+        return;
+    }
+
+    for (let i = 0; i < mensajes.length; i++) {
+        const msg = mensajes[i];
+        const li = document.createElement("li");
+
+        const titulo = document.createElement("h3");
+        titulo.textContent = msg.motivoTexto;
+
+        const nombre = document.createElement("p");
+        const etiquetaNombre = document.createElement("strong");
+        etiquetaNombre.textContent = "Nombre: ";
+        nombre.append(etiquetaNombre, msg.nombre);
+
+        const correo = document.createElement("p");
+        const etiquetaCorreo = document.createElement("strong");
+        etiquetaCorreo.textContent = "Correo: ";
+        correo.append(etiquetaCorreo, msg.email);
+
+        const textoMensaje = document.createElement("p");
+        const etiquetaMensaje = document.createElement("strong");
+        etiquetaMensaje.textContent = "Mensaje: ";
+        textoMensaje.append(etiquetaMensaje, msg.mensaje);
+
+        const fecha = document.createElement("small");
+        fecha.textContent = "Enviado el " + msg.fecha;
+
+        const btnBorrar = document.createElement("button");
+        btnBorrar.type = "button";
+        btnBorrar.textContent = "Borrar";
+        btnBorrar.dataset.accion = "borrar";
+        btnBorrar.dataset.id = msg.id;
+
+        li.append(titulo, nombre, correo);
+
+        if (msg.telefono) {
+            const telefono = document.createElement("p");
+            const etiquetaTel = document.createElement("strong");
+            etiquetaTel.textContent = "Teléfono: ";
+            telefono.append(etiquetaTel, msg.telefono);
+            li.appendChild(telefono);
+        }
+
+        li.append(textoMensaje, fecha, btnBorrar);
+        listaMensajes.appendChild(li);
     }
 }
