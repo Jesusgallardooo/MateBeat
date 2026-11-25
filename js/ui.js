@@ -107,21 +107,6 @@ export function crearDetallesPlaylist(modal, playlist, generos){
         listaCancionesIniciales.appendChild(elemento)
     }
 
-    /*
-const cancion1 = document.createElement(`li`);
-    cancion1.textContent = playlist.cancionesIniciales[0];
-
-    const cancion2 = document.createElement(`li`);
-    cancion2.textContent = playlist.cancionesIniciales[1];
-
-    const cancion3 = document.createElement(`li`);
-    cancion3.textContent = playlist.cancionesIniciales[2];
-    
-    listaCancionesIniciales.appendChild(cancion1);
-    listaCancionesIniciales.appendChild(cancion2);
-    listaCancionesIniciales.appendChild(cancion3);
-        */
-
     detalles.appendChild(descripcion);
     detalles.appendChild(listaCancionesIniciales)
 
@@ -138,4 +123,83 @@ export function mostrarDetallesPlaylist(modal, contenedor, playlist, generos) {
     const detalleDOM = crearDetallesPlaylist(modal, playlist, generos);
     contenedor.appendChild(detalleDOM);
     modal.showModal();
+}
+
+// Muestra cada error correspondiente
+export function mostrarError(input, mensaje) {
+        const idSpan = input.getAttribute("aria-describedby");
+        const spanError = document.getElementById(idSpan);
+
+        if (mensaje !== null) {
+            input.setAttribute("aria-invalid", "true");
+            spanError.textContent = mensaje;
+        } else {
+            input.removeAttribute("aria-invalid");
+            spanError.textContent = "";
+        }
+    }
+
+// Rellena el formulario dentro de la edición de cada usuario
+export function rellenarFormularioEditar(usuario) {
+    document.getElementById("titulo-registro").textContent = "Editar usuario";
+    document.getElementById("btn-registro").textContent = "Guardar cambios";
+
+    document.getElementById("registro-usuario").value = usuario.usuario;
+    document.getElementById("registro-email").value = usuario.email;
+    document.getElementById("registro-fecha").value = usuario.fechaNacimiento;
+    document.getElementById("registro-condiciones").checked = Boolean(usuario.condiciones);
+}
+
+// Pinta los usuarios 
+export function pintarUsuarios(listaUsuarios, usuarios) {
+    if (!listaUsuarios) {
+        return;
+    }
+
+    // Vaciamos la lista antes de volver a pintarla
+    listaUsuarios.textContent = "";
+
+    if (usuarios.length === 0) {
+        const liVacio = document.createElement("li");
+        liVacio.textContent = "No hay usuarios registrados todavía.";
+        listaUsuarios.appendChild(liVacio);
+        return;
+    }
+
+    for (let i = 0; i < usuarios.length; i++) {
+        const usuario = usuarios[i];
+        const li = document.createElement("li");
+
+        const nombre = document.createElement("h3");
+        nombre.textContent = usuario.usuario;
+
+        const correo = document.createElement("p");
+        correo.textContent = usuario.email;
+
+        const fecha = document.createElement("p");
+        fecha.textContent = usuario.fechaNacimiento;
+
+        const cajaBotones = document.createElement("div");
+
+        const btnEditar = document.createElement("button");
+        btnEditar.type = "button";
+        btnEditar.textContent = "Editar";
+        btnEditar.setAttribute("data-accion", "editar");
+        btnEditar.setAttribute("data-id", usuario.id);
+
+        const btnBorrar = document.createElement("button");
+        btnBorrar.type = "button";
+        btnBorrar.textContent = "Borrar";
+        btnBorrar.setAttribute("data-accion", "borrar");
+        btnBorrar.setAttribute("data-id", usuario.id);
+
+        cajaBotones.appendChild(btnEditar);
+        cajaBotones.appendChild(btnBorrar);
+
+        li.appendChild(nombre);
+        li.appendChild(correo);
+        li.appendChild(fecha);
+        li.appendChild(cajaBotones);
+        listaUsuarios.appendChild(li);
+    }
 }

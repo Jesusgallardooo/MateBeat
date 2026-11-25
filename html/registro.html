@@ -14,37 +14,37 @@
         <section>
 
             <img src="../assets/logo_m8beat.png" alt="MateBeat, Música y amigos" width="200" height="200">
-            <h1>Crear cuenta</h1>
+            <h1 id="titulo-registro">Crear cuenta</h1>
             <p>Únete a MateBeat para compartir tu música</p>
 
-            <form action="menuPrincipal.html" method="get" novalidate>
+            <form id="form-registro" action="usuarios.html" method="get" novalidate>
                 <label for="registro-usuario">Nombre de usuario</label>
-                <input type="text" name="usuario" id="registro-usuario" placeholder="pacopepe" autocomplete="username">
+                <input type="text" name="usuario" id="registro-usuario" placeholder="pacopepe" autocomplete="username" minlength="3" maxlength="20" required aria-describedby="error-usuario">
                 <span id="error-usuario"></span>
 
                 <label for="registro-email">Correo electrónico</label>
-                <input type="email" name="email" id="registro-email" placeholder="tucorreo@gmail.com" autocomplete="email@mismo.com">
+                <input type="email" name="email" id="registro-email" placeholder="tucorreo@gmail.com" autocomplete="email" required aria-describedby="error-email">
                 <span id="error-email"></span>
 
                 <label for="registro-password">Contraseña</label>
-                <input type="password" name="password" id="registro-password" placeholder="••••••••••" autocomplete="new-password">
+                <input type="password" name="password" id="registro-password" placeholder="••••••••••" autocomplete="new-password" minlength="8" required aria-describedby="error-password">
                 <span id="error-password"></span>
 
                 <label for="registro-repetir-password">Repetir contraseña</label>
-                <input type="password" name="repetirPassword" id="registro-repetir-password" placeholder="••••••••••" autocomplete="new-password">
+                <input type="password" name="repetirPassword" id="registro-repetir-password" placeholder="••••••••••" autocomplete="new-password" minlength="8" required aria-describedby="error-repetir-password">
                 <span id="error-repetir-password"></span>
 
                 <label for="registro-fecha">Fecha de nacimiento</label>
-                <input type="date" name="fechaNacimiento" id="registro-fecha">
+                <input type="date" name="fechaNacimiento" id="registro-fecha" max="2010-11-25" required aria-describedby="error-fecha">
                 <span id="error-fecha"></span>
 
                 <label for="registro-condiciones">
-                    <input type="checkbox" name="condiciones" id="registro-condiciones">
+                    <input type="checkbox" name="condiciones" id="registro-condiciones" required aria-describedby="error-condiciones">
                     Acepto las condiciones de uso
                 </label>
                 <span id="error-condiciones"></span>
             
-                <button type="submit">¡Vamos!</button>
+                <button type="submit" id="btn-registro">¡Vamos!</button>
             </form>
 
             <p>¿Ya tienes cuenta? <a href="inicioSesion.html">Inicia sesión</a></p>
